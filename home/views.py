@@ -6,6 +6,7 @@ from rest_framework import status
 from django.views import View
 from .forms import PanelForm
 from django.shortcuts import render
+from .models import News
 
 
 class AddNewsView(APIView):
@@ -26,10 +27,15 @@ class AddNewsView(APIView):
 
 class PanelView(View):
     form_class = PanelForm
+    template_name = 'home/login.html'
 
     def get(self, request):
         form = self.form_class()
-        return render(request, 'home/login.html', {'form': form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        pass
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            news = News.objects.all()
+            return render(request, 'home/news_list.html', {'news': news})
+        return render(request, self.template_name, {'form': form})

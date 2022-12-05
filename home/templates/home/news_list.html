@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}News List{% endblock %}
+{% block content %}
+<table class="table table-success table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">News</th>
+              <th scope="col">Author</th>
+              <th scope="col">Published Date</th>
+              <th scope="col">Image</th>
+              <th scope="col">URL</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for item in news %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ item.title }}</td>
+              <td>{{ item.author}}</td>
+              <td>{{ item.date_published}}</td>
+              <td><img src="{{ item.image }}" style="width: 100px;"></td>
+              <td><a class="btn btn-info" href="{{ item.url }}">Link</a></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+{% endblock %}
