@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from .serializers import NewsSerializer
 import requests
 from rest_framework import status
+from django.views import View
+from .forms import PanelForm
+from django.shortcuts import render
 
 
 class AddNewsView(APIView):
@@ -19,3 +22,14 @@ class AddNewsView(APIView):
             srz_data.create(srz_data.validated_data)
             return Response('items added', status=status.HTTP_201_CREATED)
         return Response(srz_data.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PanelView(View):
+    form_class = PanelForm
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, 'home/login.html', {'form': form})
+
+    def post(self, request):
+        pass
