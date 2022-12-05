@@ -14,6 +14,9 @@ class News(models.Model):
     attachments = models.TextField(null=True, blank=True)
     tags = models.CharField(max_length=150, null=True, blank=True)
 
+    class Meta:
+        ordering = ('-date_published', )
+
     def __str__(self):
         return f'{self.title}'
 
