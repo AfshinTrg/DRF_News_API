@@ -2,12 +2,12 @@ from django.db import models
 
 
 class News(models.Model):
-    news_id = models.IntegerField(primary_key=True)
-    news_url = models.URLField(max_length=250)
+    id = models.IntegerField(primary_key=True)
+    url = models.URLField(max_length=250)
     title = models.CharField(max_length=150)
     content_html = models.TextField()
     summary = models.CharField(max_length=250)
-    image = models.ImageField()
+    image = models.URLField()
     date_published = models.DateTimeField()
     date_modified = models.DateTimeField(null=True, blank=True)
     author = models.CharField(max_length=100, null=True, blank=True)
