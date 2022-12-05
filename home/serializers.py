@@ -7,3 +7,6 @@ class NewsSerializer(serializers.ModelSerializer):
         model = News
         fields = '__all__'
 
+    def create(self, validated_data):
+        return News.objects.create(**validated_data)
+
